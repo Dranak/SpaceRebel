@@ -22,12 +22,10 @@ public class MapDensityGenerator : MonoBehaviour
 
     public float Speed;
 
-
-    private void Start()
+    public void Awake()
     {
         Poolers = new Dictionary<string, Pooller>();
         Elements.ForEach(el => Poolers.Add(el.name, new Pooller(el.SizePooller, el.gameObject)));
-        SetUpElement();
     }
 
     //private void OnEnable()
@@ -76,6 +74,7 @@ public class MapDensityGenerator : MonoBehaviour
     public void SetUpElement()
     {
         Physics.SyncTransforms();
+
         for (int x = (int)Volume.bounds.min.x; x < (int)Volume.bounds.max.x; x += (int)Random.Range(RangeOffsetX.x, RangeOffsetX.y))
         {
             for (int y = (int)Volume.bounds.min.y; y < (int)Volume.bounds.max.y; y += (int)Random.Range(RangeOffsetY.x, RangeOffsetY.y))

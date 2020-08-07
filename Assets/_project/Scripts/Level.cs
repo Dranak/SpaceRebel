@@ -32,5 +32,6 @@ public class Level : MonoBehaviour
 
         loadedBlock.transform.parent = transform;
         loadedBlock.transform.position = SpawnStart.transform.position;
+        loadedBlock.SetUpElement();
     }
 }
