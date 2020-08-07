@@ -8,7 +8,14 @@ public class LevelBorder : MonoBehaviour
     public BorderType BorderType;
     // Start is called before the first frame update
 
-
+    private void Start()
+    {
+        //If there isn't anny block, i'll create one from the borderStart
+        if (BorderType == BorderType.Start && Level.Instance.Pooller.Pool.Where(p => p.activeInHierarchy).Count() < 1)
+        {
+            Level.Instance.LoadBlock();
+        }
+    }
     private void OnTriggerExit(Collider other)
     {
         MapDensityGenerator generator = other.GetComponent<MapDensityGenerator>();
@@ -20,10 +27,6 @@ public class LevelBorder : MonoBehaviour
         {
             generator.ClearObstacles();
             Level.Instance.Pooller.ReturnToPool(generator.gameObject);
-            if(Level.Instance.Pooller.Pool.Where(p => p.activeInHierarchy).Count() <2)
-            {
-                Level.Instance.LoadBlock();
-            }
         }
     }
 

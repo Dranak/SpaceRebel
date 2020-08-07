@@ -73,8 +73,9 @@ public class MapDensityGenerator : MonoBehaviour
 
 
 
-    void SetUpElement()
+    public void SetUpElement()
     {
+        Physics.SyncTransforms();
         for (int x = (int)Volume.bounds.min.x; x < (int)Volume.bounds.max.x; x += (int)Random.Range(RangeOffsetX.x, RangeOffsetX.y))
         {
             for (int y = (int)Volume.bounds.min.y; y < (int)Volume.bounds.max.y; y += (int)Random.Range(RangeOffsetY.x, RangeOffsetY.y))
@@ -95,15 +96,12 @@ public class MapDensityGenerator : MonoBehaviour
                         Vector3 position = new Vector3(x, y, z);
                         Vector3 rotation = new Vector3(Random.Range(0, 360f), Random.Range(0, 360f), Random.Range(0, 360f));
                         Vector3 scale = Vector3.one * Random.Range(0.75f, 1.25f);
-                        tempObject.transform.parent = null;
-                        tempObject.transform.SetParent(transform);
-                        tempObject.transform.localPosition = position;
+                        tempObject.transform.parent = transform;
+                        tempObject.transform.position = position;
                         tempObject.transform.eulerAngles = rotation;
                         break;
 
                     }
-
-                    //}
                 }
             }
 

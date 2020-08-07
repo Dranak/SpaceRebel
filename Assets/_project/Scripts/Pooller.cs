@@ -49,8 +49,7 @@ public class Pooller
     {
         Pool.Enqueue(unpool);
         unpool.transform.position = Vector3.zero;
-        unpool.transform.parent = null;
-        unpool.transform.SetParent(Level.Instance.Pool.transform);
+        unpool.transform.parent = Level.Instance.Pool.transform;
         unpool.SetActive(false);
     }
 }

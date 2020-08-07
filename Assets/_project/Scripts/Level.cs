@@ -29,9 +29,8 @@ public class Level : MonoBehaviour
     public void LoadBlock()
     {
         MapDensityGenerator loadedBlock = Pooller.GetObject().GetComponent<MapDensityGenerator>();
-        loadedBlock.transform.parent =null;
-        loadedBlock.transform.SetParent(transform);
-        loadedBlock.transform.position = SpawnStart.transform.position;
 
+        loadedBlock.transform.parent = transform;
+        loadedBlock.transform.position = SpawnStart.transform.position;
     }
 }
