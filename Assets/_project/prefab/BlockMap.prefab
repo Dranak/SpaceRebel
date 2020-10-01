@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9074779920469694198}
   - component: {fileID: 9074779920469694197}
   - component: {fileID: 9074779920469694195}
-  - component: {fileID: 7044895652208877660}
+  - component: {fileID: 2987092842231049064}
   m_Layer: 0
   m_Name: BlockMap
   m_TagString: Untagged
@@ -54,19 +54,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ElementSpacing: 3
-  Volume: {fileID: 7044895652208877660}
+  RangeNumberOfElement: {x: 20, y: 100}
+  Volume: {fileID: 2987092842231049064}
   Elements:
-  - {fileID: 299180123594979979, guid: c7d07a45de5833a4a98eb62cf75f3fa7, type: 3}
-  - {fileID: -4276446571042589195, guid: 3aaae57dd8546a64caa3c008ec3e1ca4, type: 3}
-  - {fileID: 448479323132607072, guid: 8db94165b213ed8459d7b29ac12c5b18, type: 3}
-  - {fileID: -6837944529855874753, guid: a54f6a06ee7be494f9e87015130cdcad, type: 3}
-  - {fileID: 7912726654919516935, guid: c4fee0481362eab42b9479cb3efe8ca0, type: 3}
-  - {fileID: -7191885320153914650, guid: 64a4590a51c34634eb7d6b5f137943a0, type: 3}
-  RangeOffsetX: {x: 3, y: 6}
-  RangeOffsetY: {x: 3, y: 7}
+  - {fileID: -7911797831322446965, guid: 678bc45fa6df37043b80d12daa3a9d51, type: 3}
+  - {fileID: 4282054913252525483, guid: 75204aeb0b1f4194e8dd78998abb7652, type: 3}
+  - {fileID: -5450487780180448251, guid: 7255e26f7d2981d4ea7ed83351d2d805, type: 3}
+  - {fileID: -4079197554275573997, guid: 6f6b913233923554eb49f4cb7bd23ff4, type: 3}
+  - {fileID: 5576786682430600526, guid: 93a05d93f0fd810439cd9267453b0865, type: 3}
+  - {fileID: 1958328383351252604, guid: fdba5130b4369c4418d13375cbd4f27c, type: 3}
+  - {fileID: 3289268105469362393, guid: be0c5bb5e87aa724389ad73a7f8e9788, type: 3}
+  - {fileID: 5013419672657454127, guid: 3277d8aafcb068342a9f3d43a8b75b8c, type: 3}
+  - {fileID: -3310656967275661291, guid: 2bca82b9337d12545a5f3238ab55612b, type: 3}
+  - {fileID: 4394188502314552041, guid: ea3b1b7de8e530346b335abce83beb31, type: 3}
+  - {fileID: 8956224698896929793, guid: 53626206312a0e34c8b9d69f0cde2452, type: 3}
+  - {fileID: -3777033595873879261, guid: 66384f19d8d3cc042a4841bb312b05e4, type: 3}
+  - {fileID: -4482634658546705049, guid: c3ae58415e58c4c4db86b24da5468761, type: 3}
+  - {fileID: 4470767223465870762, guid: dd3c1c678387e4e48ab9e711f4a22844, type: 3}
+  - {fileID: -7361676607659138809, guid: 00684c1d8314c3a4f8d58f4988233356, type: 3}
+  - {fileID: 7396718793285339915, guid: 6352ac70b184ad14f97f439232978d61, type: 3}
+  - {fileID: -7560381794381038127, guid: abad2f0b359f8a445a4c199a05691f84, type: 3}
+  - {fileID: 3151841299101870857, guid: 440691a435237c841a7b16830d776dd3, type: 3}
+  - {fileID: -4409410634153733080, guid: dc134c807fe86f04aacd9559cad52091, type: 3}
+  - {fileID: 1196057845570036297, guid: 51db1e0f8a2ffb841a9e47380df0fc62, type: 3}
+  - {fileID: -7363083195385633521, guid: 197689c139fb671489c4faec41b5fb80, type: 3}
+  RangeOffsetX: {x: 3, y: 7}
+  RangeOffsetY: {x: 3, y: 8}
   RangeOffsetZ: {x: 2, y: 6}
-  Speed: 5
---- !u!65 &7044895652208877660
+  Speed: 40
+--- !u!65 &2987092842231049064
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,8 +90,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9074779920469694194}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 100, y: 50, z: 20}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 350, y: 200, z: 80}
+  m_Center: {x: 0, y: 0, z: 40}

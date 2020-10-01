@@ -2,27 +2,63 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshCollider))]
 public class Element : MonoBehaviour
 {
-    [Range(1, 10)]
-    public int Density;
-
     public int SizePooller = 5;
+    public int ScaleMax = 3;
+    public float TimeWaitToScale = 0.5f;
+    private float _distanceFromStart;
+    private float _distanceWait = 0f;
 
-    
+    private float _chronoWaitToScale = 0f;
 
-    public bool CanPlace()
+    private void Start()
     {
+        _distanceWait = 0f;
+        _distanceFromStart = 0f;
+        transform.localScale = Vector3.zero;
+    }
 
-        // Validation check to see if element can be placed. More detailed calculations can go here, such as checking perlin noise.
-
-        if (Random.Range(0, 10) < Density)
-            return true;
-        else
-            return false;
+    private void Update()
+    {
+        //if (TimeToScale())
+        //{
+            _distanceFromStart = Vector3.Distance(Level.Instance.SpawnStart.transform.position, transform.position);
+            float percentage = Mathf.Max((_distanceFromStart / Level.Instance.Distance), 0f);
+            transform.localScale = Vector3.one * Mathf.Lerp(0, ScaleMax, percentage);
+        //}
 
     }
 
 
+    bool TimeToScale()
+    {
+        if (_chronoWaitToScale <= TimeWaitToScale)
+        {
+            _chronoWaitToScale += Time.deltaTime;
+            return false;
+        }
+        else
+        {
+            if (_distanceWait == 0f)
+            {
+                _distanceWait = Vector3.Distance(Level.Instance.SpawnStart.transform.position, transform.position);
+            }
+            return true;
+        }
+    }
 
+
+    private void OnEnable()
+    {
+        _distanceWait = 0f;
+        _distanceFromStart = 0f;
+        transform.localScale = Vector3.zero;
+    }
+
+    private void OnDisable()
+    {
+
+    }
 }

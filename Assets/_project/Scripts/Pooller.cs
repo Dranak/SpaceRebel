@@ -21,8 +21,7 @@ public class Pooller
         for (int i = 0; i < PoolStartSize; i++)
         {
             GameObject critter = GameObject.Instantiate(Prefab,Vector3.zero, Quaternion.identity, Level.Instance.Pool.transform);
-            critter.name = prefab.name + "-" + i;
-             
+            critter.name = prefab.name + "-" + i;           
             Pool.Enqueue(critter);
             critter.SetActive(false);
         }
@@ -41,7 +40,6 @@ public class Pooller
             GameObject _tempObject = GameObject.Instantiate(Prefab);
             return _tempObject;
         }
-
         return null;
     }
 

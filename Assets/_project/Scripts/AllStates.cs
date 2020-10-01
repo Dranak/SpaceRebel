@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StateMove
+public enum QuestDifficulty
 {
-    Roll,
-    Straight,
-    RollBack
+    Easy,
+    Normal,
+    Hard
 
 }
 

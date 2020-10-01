@@ -10,7 +10,7 @@ public class SpaceShipController : MonoBehaviour
     public float Speed;
     public float TurnSpeed;
     private float _chronoRotate = 0f;
-    public StateMove State { get; set; } = StateMove.Straight;
+   
     private float _sign = 0;
     Rigidbody _rigidbody = null;
     Vector3 ScreenPos;

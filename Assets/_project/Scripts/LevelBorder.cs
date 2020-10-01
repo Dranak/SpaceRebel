@@ -6,6 +6,7 @@ using UnityEngine;
 public class LevelBorder : MonoBehaviour
 {
     public BorderType BorderType;
+
     // Start is called before the first frame update
 
     private void Start()

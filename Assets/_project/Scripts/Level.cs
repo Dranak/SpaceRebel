@@ -10,6 +10,7 @@ public class Level : MonoBehaviour
     public LevelBorder SpawnStart;
     public LevelBorder End;
     public GameObject Pool;
+    public float Distance;
     public Pooller Pooller { get; set; }
 
 
@@ -17,7 +18,7 @@ public class Level : MonoBehaviour
     {
         Instance = Instance ?? this;
         Pooller = new Pooller(SizePooller, MapGenerator.gameObject);
-
+        Distance = Mathf.Abs(Vector3.Distance(SpawnStart.transform.position, End.transform.position));
     }
 
     // Update is called once per frame
@@ -29,9 +30,11 @@ public class Level : MonoBehaviour
     public void LoadBlock()
     {
         MapDensityGenerator loadedBlock = Pooller.GetObject().GetComponent<MapDensityGenerator>();
-
         loadedBlock.transform.parent = transform;
-        loadedBlock.transform.position = SpawnStart.transform.position;
-        loadedBlock.SetUpElement();
+        if (loadedBlock.Volume is SphereCollider)
+            loadedBlock.transform.position = new Vector3(SpawnStart.transform.position.x, SpawnStart.transform.position.y, SpawnStart.transform.position.z + (loadedBlock.Volume as SphereCollider).radius);
+        else
+            loadedBlock.transform.position = SpawnStart.transform.position +  Vector3.forward*20;
+        loadedBlock.FillVolume();
     }
 }
