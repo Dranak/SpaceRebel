@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2397602}
   - component: {fileID: 4470767223465870762}
   - component: {fileID: 1798285463513841842}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: astre_13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 186512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SizePooller: 20
-  ScaleMax: 8
-  TimeWaitToScale: 0.5
+  ScaleMax: 5
+  EnergyGain: -0.1
 --- !u!114 &1798285463513841842
 MonoBehaviour:
   m_ObjectHideFlags: 0

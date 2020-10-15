@@ -1,59 +1,59 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager Instance;
 
-    public Quest SelectedQuest;
-    public event Action<float> UpdateQuest;
-    public event Action OnReadyEndQuest;
-    public event Action OnEndQuest;
+    public GameObject Starfield;
+    private float _zStartStarField;
+    public SpaceShipController Player;
+    public Level Level;
+
 
     private float _chronoQuest;
-    private float _durationQuest;
-    private float _progressTimeQuest=0f;
-
+     
 
     private void Awake()
     {
         Instance = Instance ?? this;
-        SelectedQuest = QuestManager.SelectedQuest;
     }
     // Start is called before the first frame update
     void Start()
     {
-        SetupQuest();
-
-
+        Player.OnSpeedUp += Player_OnSpeedUp;
+        Player.OnDeath += Player_OnDeath;
+        _zStartStarField = Starfield.transform.position.z;
+        Level.StartSpawnBlock();
     }
 
+    private void Player_OnDeath()
+    {
+        Time.timeScale = 0f;
+    }
 
+    private void Player_OnSpeedUp(float _ratio)
+    {
+        Debug.Log("ratio " + _ratio);
+        //Level.Pooller.Pool.ToList().ForEach(mg => mg.GetComponent<MapDensityGenerator>().SetSpeed(_ratio));
+        Starfield.transform.position = new Vector3(Starfield.transform.position.x, Starfield.transform.position.y, Mathf.Lerp(_zStartStarField, 600, _ratio));
+    }
 
     // Update is called once per frame
     void Update()
     {
-        TimeQuest();
+        TimeRun();
     }
 
 
-    void SetupQuest()
-    {
-        _durationQuest = SelectedQuest.Duration;
-
-    }
-
-    void TimeQuest()
+    void TimeRun()
     {
         _chronoQuest += Time.deltaTime;
-        _progressTimeQuest = _chronoQuest / _durationQuest;
-        UiManager.Instance.UpdateSlider(_progressTimeQuest);
-        if (_progressTimeQuest > 0.8f)
-        {
-            OnReadyEndQuest?.Invoke();
-        }
+       
+        UiManager.Instance.UpdateChrono(_chronoQuest);
+
     }
 }

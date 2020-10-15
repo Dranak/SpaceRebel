@@ -5,20 +5,27 @@ using UnityEngine;
 public class Level : MonoBehaviour
 {
     public static Level Instance { get; set; }
-    public MapDensityGenerator MapGenerator;
+    public Queue<MapDensityGenerator> LoadedBlock { get; set; }
+    public List<MapDensityGenerator> ListBlocks;
+    public Dictionary<string, Pooller> PoolersBlocks { get; set; }
     public int SizePooller;
-    public LevelBorder SpawnStart;
-    public LevelBorder End;
     public GameObject Pool;
     public float Distance;
-    public Pooller Pooller { get; set; }
-
+    public Vector3 spawnOrigin;
+    public int blockToSpawn = 10;
+   
 
     void Awake()
     {
         Instance = Instance ?? this;
-        Pooller = new Pooller(SizePooller, MapGenerator.gameObject);
-        Distance = Mathf.Abs(Vector3.Distance(SpawnStart.transform.position, End.transform.position));
+        PoolersBlocks = new Dictionary<string, Pooller>();
+        foreach (MapDensityGenerator block in ListBlocks)
+        {
+            PoolersBlocks.Add(block.name.Split('-')[0],new Pooller(SizePooller, block.gameObject));
+        }
+        
+        LoadedBlock = new Queue<MapDensityGenerator>();
+        //Distance = Mathf.Abs(Vector3.Distance(SpawnStart.transform.position, End.transform.position));
     }
 
     // Update is called once per frame
@@ -29,12 +36,28 @@ public class Level : MonoBehaviour
 
     public void LoadBlock()
     {
-        MapDensityGenerator loadedBlock = Pooller.GetObject().GetComponent<MapDensityGenerator>();
+        string randomBlockName = ListBlocks[Random.Range(0, ListBlocks.Count)].name.Split('-')[0];
+        MapDensityGenerator loadedBlock = PoolersBlocks[randomBlockName].GetObject().GetComponent<MapDensityGenerator>();
+        LoadedBlock.Enqueue(loadedBlock);
         loadedBlock.transform.parent = transform;
-        if (loadedBlock.Volume is SphereCollider)
-            loadedBlock.transform.position = new Vector3(SpawnStart.transform.position.x, SpawnStart.transform.position.y, SpawnStart.transform.position.z + (loadedBlock.Volume as SphereCollider).radius);
-        else
-            loadedBlock.transform.position = SpawnStart.transform.position +  Vector3.forward*20;
+        loadedBlock.transform.position = GameManager.Instance.Player.transform.forward*loadedBlock.Volume.bounds.size.z*LoadedBlock.Count;
         loadedBlock.FillVolume();
     }
+
+    public void UpdateSpawnOrigin(Vector3 originDelta)
+    {
+        spawnOrigin = spawnOrigin + originDelta;
+    }
+
+
+    public void StartSpawnBlock()
+    {
+
+        for(int i=0; i < blockToSpawn;++i)
+        {
+            LoadBlock();
+        }
+
+    }
+
 }

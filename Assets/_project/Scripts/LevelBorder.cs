@@ -9,26 +9,28 @@ public class LevelBorder : MonoBehaviour
 
     // Start is called before the first frame update
 
-    private void Start()
-    {
-        //If there isn't anny block, i'll create one from the borderStart
-        if (BorderType == BorderType.Start && Level.Instance.Pooller.Pool.Where(p => p.activeInHierarchy).Count() < 1)
-        {
-            Level.Instance.LoadBlock();
-        }
-    }
     private void OnTriggerExit(Collider other)
     {
-        MapDensityGenerator generator = other.GetComponent<MapDensityGenerator>();
-        if (generator && BorderType == BorderType.Start)
+        if(other.gameObject.GetComponent<SpaceShipController>())
         {
-            Level.Instance.LoadBlock();
-        }
-        else if (generator && BorderType == BorderType.End)
-        {
+            MapDensityGenerator generator = Level.Instance.LoadedBlock.Dequeue();
             generator.ClearObstacles();
-            Level.Instance.Pooller.ReturnToPool(generator.gameObject);
+            Level.Instance.PoolersBlocks[generator.name.Split('-')[0]].ReturnToPool(generator.gameObject);
         }
     }
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    MapDensityGenerator generator = other.GetComponent<MapDensityGenerator>();
+    //    if (generator && BorderType == BorderType.Start)
+    //    {
+    //        Level.Instance.LoadBlock();
+    //    }
+    //    else if (generator && BorderType == BorderType.End)
+    //    {
+    //        generator.ClearObstacles();
+    //        Level.Instance.Pooller.ReturnToPool(generator.gameObject);
+    //    }
+    //}
 
 }
